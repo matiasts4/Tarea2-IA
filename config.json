@@ -1,0 +1,48 @@
+{
+  "logistic_regression": [
+    {
+      "name": "LR_config_1",
+      "max_iter": 1000,
+      "C": 1.0,
+      "solver": "lbfgs",
+      "learning_rate": 0.01
+    },
+    {
+      "name": "LR_config_2",
+      "max_iter": 1000,
+      "C": 0.1,
+      "solver": "saga",
+      "learning_rate": 0.001
+    },
+    {
+      "name": "LR_config_3",
+      "max_iter": 1000,
+      "C": 10.0,
+      "solver": "lbfgs",
+      "learning_rate": 0.1
+    }
+  ],
+  "svm": [
+    {
+      "name": "SVM_config_1",
+      "C": 1.0,
+      "kernel": "rbf",
+      "gamma": "scale",
+      "max_iter": 1000
+    },
+    {
+      "name": "SVM_config_2",
+      "C": 0.1,
+      "kernel": "linear",
+      "gamma": "auto",
+      "max_iter": 1000
+    },
+    {
+      "name": "SVM_config_3",
+      "C": 10.0,
+      "kernel": "rbf",
+      "gamma": "auto",
+      "max_iter": 1000
+    }
+  ]
+}

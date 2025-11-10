@@ -1,0 +1,560 @@
+2025-11-09 13:07:08,636 - INFO - ============================================================
+2025-11-09 13:07:08,637 - INFO - TAREA 2 - PARTE 1: CLUSTERING
+2025-11-09 13:07:08,637 - INFO - Inicio: 2025-11-09 13:07:08
+2025-11-09 13:07:08,637 - INFO - ============================================================
+2025-11-09 13:07:08,637 - INFO - ============================================================
+2025-11-09 13:07:08,637 - INFO - CARGANDO DATASET
+2025-11-09 13:07:08,637 - INFO - ============================================================
+2025-11-09 13:07:08,637 - INFO - Descargando dataset MNIST...
+2025-11-09 13:07:11,475 - INFO - Tomando muestra de 15,000 registros...
+2025-11-09 13:07:11,576 - INFO - Dataset cargado: 15000 filas, 784 columnas
+2025-11-09 13:07:11,577 - INFO - Clases únicas: [np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4), np.int64(5), np.int64(6), np.int64(7), np.int64(8), np.int64(9)]
+2025-11-09 13:07:11,643 - INFO - 
+============================================================
+2025-11-09 13:07:11,643 - INFO - PREPARACIÓN DE DATOS
+2025-11-09 13:07:11,644 - INFO - ============================================================
+2025-11-09 13:07:11,691 - INFO - Train set: 12000 muestras (80%)
+2025-11-09 13:07:11,692 - INFO - Test set: 3000 muestras (20%)
+2025-11-09 13:07:11,692 - INFO - Normalizando datos con StandardScaler...
+2025-11-09 13:07:11,912 - INFO - Media train: -0.0000, Std train: 0.9327
+2025-11-09 13:07:11,921 - INFO - Estimando bandwidth óptimo para MeanShift...
+2025-11-09 13:07:13,364 - INFO - Bandwidth estimado: 27.59
+2025-11-09 13:07:13,366 - INFO - 
+============================================================
+2025-11-09 13:07:13,366 - INFO - JUSTIFICACIÓN DE PARÁMETROS
+2025-11-09 13:07:13,366 - INFO - ============================================================
+2025-11-09 13:07:13,366 - INFO - 
+K-Means y K-Means++:
+- n_clusters: Variamos entre 10-25 para explorar diferentes granularidades
+- init: 'random' vs 'k-means++' para comparar estrategias de inicialización
+- n_init: Múltiples inicializaciones para evitar mínimos locales
+- max_iter: Suficientes iteraciones para convergencia
+
+MeanShift:
+- bandwidth: Controla el tamaño de la ventana de búsqueda. Se estima automáticamente
+  basado en los datos y se prueban variaciones (0.8x, 1.0x, 1.2x, 1.5x)
+- bin_seeding: Acelera el algoritmo mediante discretización
+        
+2025-11-09 13:07:13,367 - INFO - 
+============================================================
+2025-11-09 13:07:13,367 - INFO - ENTRENAMIENTO DE MODELOS DE CLUSTERING
+2025-11-09 13:07:13,367 - INFO - ============================================================
+2025-11-09 13:07:13,367 - INFO - 
+KMeans:
+2025-11-09 13:07:13,367 - INFO -   Configuración 1: {'n_clusters': 10, 'init': 'random', 'n_init': 10, 'max_iter': 300}
+2025-11-09 13:07:16,831 - INFO -     ✓ Silhouette Score: 0.0056
+2025-11-09 13:07:16,831 - INFO -     ✓ Clusters encontrados: 10
+2025-11-09 13:07:16,832 - INFO -     ✓ Tiempo: 3.03s
+2025-11-09 13:07:16,832 - INFO -   Configuración 2: {'n_clusters': 15, 'init': 'random', 'n_init': 20, 'max_iter': 300}
+2025-11-09 13:07:23,183 - INFO -     ✓ Silhouette Score: -0.0131
+2025-11-09 13:07:23,183 - INFO -     ✓ Clusters encontrados: 15
+2025-11-09 13:07:23,183 - INFO -     ✓ Tiempo: 5.92s
+2025-11-09 13:07:23,184 - INFO -   Configuración 3: {'n_clusters': 20, 'init': 'random', 'n_init': 10, 'max_iter': 500}
+2025-11-09 13:07:27,201 - INFO -     ✓ Silhouette Score: -0.0135
+2025-11-09 13:07:27,202 - INFO -     ✓ Clusters encontrados: 20
+2025-11-09 13:07:27,202 - INFO -     ✓ Tiempo: 3.59s
+2025-11-09 13:07:27,202 - INFO -   Configuración 4: {'n_clusters': 25, 'init': 'random', 'n_init': 15, 'max_iter': 300}
+2025-11-09 13:07:33,281 - INFO -     ✓ Silhouette Score: 0.0015
+2025-11-09 13:07:33,281 - INFO -     ✓ Clusters encontrados: 25
+2025-11-09 13:07:33,281 - INFO -     ✓ Tiempo: 5.65s
+2025-11-09 13:07:33,282 - INFO - 
+KMeans++:
+2025-11-09 13:07:33,282 - INFO -   Configuración 1: {'n_clusters': 10, 'init': 'k-means++', 'n_init': 10, 'max_iter': 300}
+2025-11-09 13:07:37,335 - INFO -     ✓ Silhouette Score: 0.0092
+2025-11-09 13:07:37,336 - INFO -     ✓ Clusters encontrados: 10
+2025-11-09 13:07:37,336 - INFO -     ✓ Tiempo: 3.63s
+2025-11-09 13:07:37,336 - INFO -   Configuración 2: {'n_clusters': 15, 'init': 'k-means++', 'n_init': 20, 'max_iter': 300}
+2025-11-09 13:07:44,472 - INFO -     ✓ Silhouette Score: -0.0071
+2025-11-09 13:07:44,472 - INFO -     ✓ Clusters encontrados: 15
+2025-11-09 13:07:44,472 - INFO -     ✓ Tiempo: 6.71s
+2025-11-09 13:07:44,472 - INFO -   Configuración 3: {'n_clusters': 20, 'init': 'k-means++', 'n_init': 10, 'max_iter': 500}
+2025-11-09 13:07:48,574 - INFO -     ✓ Silhouette Score: 0.0214
+2025-11-09 13:07:48,574 - INFO -     ✓ Clusters encontrados: 20
+2025-11-09 13:07:48,575 - INFO -     ✓ Tiempo: 3.68s
+2025-11-09 13:07:48,575 - INFO -   Configuración 4: {'n_clusters': 25, 'init': 'k-means++', 'n_init': 15, 'max_iter': 300}
+2025-11-09 13:07:55,969 - INFO -     ✓ Silhouette Score: -0.0044
+2025-11-09 13:07:55,969 - INFO -     ✓ Clusters encontrados: 25
+2025-11-09 13:07:55,969 - INFO -     ✓ Tiempo: 6.93s
+2025-11-09 13:07:55,969 - INFO - 
+MeanShift:
+2025-11-09 13:07:55,970 - INFO -   Configuración 1: {'bandwidth': np.float64(22.07130155674529), 'bin_seeding': True}
+2025-11-09 13:08:09,908 - INFO -     ✓ Silhouette Score: 0.2252
+2025-11-09 13:08:09,909 - INFO -     ✓ Clusters encontrados: 39
+2025-11-09 13:08:09,909 - INFO -     ✓ Tiempo: 13.45s
+2025-11-09 13:08:09,909 - INFO -   Configuración 2: {'bandwidth': np.float64(27.58912694593161), 'bin_seeding': True}
+2025-11-09 13:08:32,038 - INFO -     ✓ Silhouette Score: 0.2746
+2025-11-09 13:08:32,038 - INFO -     ✓ Clusters encontrados: 76
+2025-11-09 13:08:32,038 - INFO -     ✓ Tiempo: 21.61s
+2025-11-09 13:08:32,039 - INFO -   Configuración 3: {'bandwidth': np.float64(33.10695233511793), 'bin_seeding': False}
+2025-11-09 14:09:49,661 - INFO -     ✓ Silhouette Score: 0.2462
+2025-11-09 14:09:49,662 - INFO -     ✓ Clusters encontrados: 247
+2025-11-09 14:09:49,662 - INFO -     ✓ Tiempo: 3676.77s
+2025-11-09 14:09:49,662 - INFO -   Configuración 4: {'bandwidth': np.float64(41.383690418897416), 'bin_seeding': True}
+2025-11-09 14:10:34,211 - INFO -     ✓ Silhouette Score: 0.4229
+2025-11-09 14:10:34,212 - INFO -     ✓ Clusters encontrados: 68
+2025-11-09 14:10:34,212 - INFO -     ✓ Tiempo: 43.75s
+2025-11-09 14:10:34,212 - INFO - 
+============================================================
+2025-11-09 14:10:34,213 - INFO - SELECCIÓN DE TOP 3 CONFIGURACIONES
+2025-11-09 14:10:34,213 - INFO - ============================================================
+2025-11-09 14:10:34,213 - INFO - 1. MeanShift - Config 4
+2025-11-09 14:10:34,213 - INFO -    Silhouette Score: 0.4229
+2025-11-09 14:10:34,213 - INFO -    Clusters: 68
+2025-11-09 14:10:34,213 - INFO -    Tiempo: 43.75s
+2025-11-09 14:10:34,213 - INFO - 2. MeanShift - Config 2
+2025-11-09 14:10:34,214 - INFO -    Silhouette Score: 0.2746
+2025-11-09 14:10:34,214 - INFO -    Clusters: 76
+2025-11-09 14:10:34,214 - INFO -    Tiempo: 21.61s
+2025-11-09 14:10:34,214 - INFO - 3. MeanShift - Config 3
+2025-11-09 14:10:34,214 - INFO -    Silhouette Score: 0.2462
+2025-11-09 14:10:34,214 - INFO -    Clusters: 247
+2025-11-09 14:10:34,215 - INFO -    Tiempo: 3676.77s
+2025-11-09 14:10:34,215 - INFO - 
+============================================================
+2025-11-09 14:10:34,215 - INFO - EVALUACIÓN EN CONJUNTO DE TEST
+2025-11-09 14:10:34,215 - INFO - ============================================================
+2025-11-09 14:10:34,215 - INFO - 
+1. MeanShift - Config 4
+2025-11-09 14:10:34,215 - INFO -    Silhouette Score (train): 0.4229
+2025-11-09 14:10:34,229 - INFO -    Cluster 0 -> Etiqueta 1 (11805 muestras)
+2025-11-09 14:10:34,230 - INFO -    Cluster 1 -> Etiqueta 6 (16 muestras)
+2025-11-09 14:10:34,230 - INFO -    Cluster 2 -> Etiqueta 3 (15 muestras)
+2025-11-09 14:10:34,230 - INFO -    Cluster 3 -> Etiqueta 2 (7 muestras)
+2025-11-09 14:10:34,231 - INFO -    Cluster 4 -> Etiqueta 2 (6 muestras)
+2025-11-09 14:10:34,231 - INFO -    Cluster 5 -> Etiqueta 6 (7 muestras)
+2025-11-09 14:10:34,232 - INFO -    Cluster 6 -> Etiqueta 6 (4 muestras)
+2025-11-09 14:10:34,232 - INFO -    Cluster 7 -> Etiqueta 3 (10 muestras)
+2025-11-09 14:10:34,233 - INFO -    Cluster 8 -> Etiqueta 6 (13 muestras)
+2025-11-09 14:10:34,233 - INFO -    Cluster 9 -> Etiqueta 2 (7 muestras)
+2025-11-09 14:10:34,233 - INFO -    Cluster 10 -> Etiqueta 2 (7 muestras)
+2025-11-09 14:10:34,233 - INFO -    Cluster 11 -> Etiqueta 0 (2 muestras)
+2025-11-09 14:10:34,234 - INFO -    Cluster 12 -> Etiqueta 3 (3 muestras)
+2025-11-09 14:10:34,234 - INFO -    Cluster 13 -> Etiqueta 5 (2 muestras)
+2025-11-09 14:10:34,234 - INFO -    Cluster 14 -> Etiqueta 9 (3 muestras)
+2025-11-09 14:10:34,234 - INFO -    Cluster 15 -> Etiqueta 5 (3 muestras)
+2025-11-09 14:10:34,234 - INFO -    Cluster 16 -> Etiqueta 7 (4 muestras)
+2025-11-09 14:10:34,234 - INFO -    Cluster 17 -> Etiqueta 6 (5 muestras)
+2025-11-09 14:10:34,235 - INFO -    Cluster 18 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,235 - INFO -    Cluster 19 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,235 - INFO -    Cluster 20 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,235 - INFO -    Cluster 21 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,236 - INFO -    Cluster 22 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,236 - INFO -    Cluster 23 -> Etiqueta 6 (5 muestras)
+2025-11-09 14:10:34,236 - INFO -    Cluster 24 -> Etiqueta 6 (4 muestras)
+2025-11-09 14:10:34,236 - INFO -    Cluster 25 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,237 - INFO -    Cluster 26 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,237 - INFO -    Cluster 27 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,237 - INFO -    Cluster 28 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,237 - INFO -    Cluster 29 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,238 - INFO -    Cluster 30 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,238 - INFO -    Cluster 31 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,238 - INFO -    Cluster 32 -> Etiqueta 2 (3 muestras)
+2025-11-09 14:10:34,238 - INFO -    Cluster 33 -> Etiqueta 2 (3 muestras)
+2025-11-09 14:10:34,238 - INFO -    Cluster 34 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,238 - INFO -    Cluster 35 -> Etiqueta 3 (2 muestras)
+2025-11-09 14:10:34,239 - INFO -    Cluster 36 -> Etiqueta 1 (1 muestras)
+2025-11-09 14:10:34,239 - INFO -    Cluster 37 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,239 - INFO -    Cluster 38 -> Etiqueta 1 (1 muestras)
+2025-11-09 14:10:34,240 - INFO -    Cluster 39 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,240 - INFO -    Cluster 40 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,240 - INFO -    Cluster 41 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,241 - INFO -    Cluster 42 -> Etiqueta 8 (3 muestras)
+2025-11-09 14:10:34,241 - INFO -    Cluster 43 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,242 - INFO -    Cluster 44 -> Etiqueta 3 (2 muestras)
+2025-11-09 14:10:34,242 - INFO -    Cluster 45 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,243 - INFO -    Cluster 46 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,243 - INFO -    Cluster 47 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,243 - INFO -    Cluster 48 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,243 - INFO -    Cluster 49 -> Etiqueta 9 (3 muestras)
+2025-11-09 14:10:34,244 - INFO -    Cluster 50 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,244 - INFO -    Cluster 51 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,244 - INFO -    Cluster 52 -> Etiqueta 9 (6 muestras)
+2025-11-09 14:10:34,244 - INFO -    Cluster 53 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,244 - INFO -    Cluster 54 -> Etiqueta 8 (2 muestras)
+2025-11-09 14:10:34,245 - INFO -    Cluster 55 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,245 - INFO -    Cluster 56 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,245 - INFO -    Cluster 57 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,245 - INFO -    Cluster 58 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,246 - INFO -    Cluster 59 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,246 - INFO -    Cluster 60 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,246 - INFO -    Cluster 61 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,246 - INFO -    Cluster 62 -> Etiqueta 2 (2 muestras)
+2025-11-09 14:10:34,246 - INFO -    Cluster 63 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,247 - INFO -    Cluster 64 -> Etiqueta 9 (2 muestras)
+2025-11-09 14:10:34,247 - INFO -    Cluster 65 -> Etiqueta 7 (3 muestras)
+2025-11-09 14:10:34,247 - INFO -    Cluster 66 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,248 - INFO -    Cluster 67 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,249 - INFO - 
+   ✓ Accuracy en test: 0.1280
+2025-11-09 14:10:34,250 - INFO -    ✓ Clusters únicos en test: 21
+2025-11-09 14:10:34,251 - INFO -    ✓ Distribución de predicciones: Counter({np.int64(1): 2955, np.int64(6): 17, np.int64(2): 10, np.int64(3): 7, np.int64(9): 4, np.int64(4): 2, np.int64(8): 2, np.int64(7): 2, np.int64(0): 1})
+2025-11-09 14:10:34,251 - INFO - 
+2. MeanShift - Config 2
+2025-11-09 14:10:34,252 - INFO -    Silhouette Score (train): 0.2746
+2025-11-09 14:10:34,264 - INFO -    Cluster 0 -> Etiqueta 1 (11610 muestras)
+2025-11-09 14:10:34,264 - INFO -    Cluster 1 -> Etiqueta 6 (13 muestras)
+2025-11-09 14:10:34,265 - INFO -    Cluster 2 -> Etiqueta 7 (13 muestras)
+2025-11-09 14:10:34,265 - INFO -    Cluster 3 -> Etiqueta 6 (12 muestras)
+2025-11-09 14:10:34,265 - INFO -    Cluster 4 -> Etiqueta 5 (11 muestras)
+2025-11-09 14:10:34,266 - INFO -    Cluster 5 -> Etiqueta 7 (10 muestras)
+2025-11-09 14:10:34,266 - INFO -    Cluster 6 -> Etiqueta 8 (8 muestras)
+2025-11-09 14:10:34,266 - INFO -    Cluster 7 -> Etiqueta 8 (15 muestras)
+2025-11-09 14:10:34,267 - INFO -    Cluster 8 -> Etiqueta 7 (23 muestras)
+2025-11-09 14:10:34,267 - INFO -    Cluster 9 -> Etiqueta 6 (7 muestras)
+2025-11-09 14:10:34,267 - INFO -    Cluster 10 -> Etiqueta 6 (6 muestras)
+2025-11-09 14:10:34,268 - INFO -    Cluster 11 -> Etiqueta 2 (9 muestras)
+2025-11-09 14:10:34,268 - INFO -    Cluster 12 -> Etiqueta 3 (16 muestras)
+2025-11-09 14:10:34,268 - INFO -    Cluster 13 -> Etiqueta 6 (4 muestras)
+2025-11-09 14:10:34,268 - INFO -    Cluster 14 -> Etiqueta 3 (7 muestras)
+2025-11-09 14:10:34,269 - INFO -    Cluster 15 -> Etiqueta 5 (11 muestras)
+2025-11-09 14:10:34,269 - INFO -    Cluster 16 -> Etiqueta 7 (7 muestras)
+2025-11-09 14:10:34,269 - INFO -    Cluster 17 -> Etiqueta 6 (2 muestras)
+2025-11-09 14:10:34,269 - INFO -    Cluster 18 -> Etiqueta 6 (2 muestras)
+2025-11-09 14:10:34,269 - INFO -    Cluster 19 -> Etiqueta 6 (3 muestras)
+2025-11-09 14:10:34,270 - INFO -    Cluster 20 -> Etiqueta 0 (16 muestras)
+2025-11-09 14:10:34,270 - INFO -    Cluster 21 -> Etiqueta 2 (6 muestras)
+2025-11-09 14:10:34,270 - INFO -    Cluster 22 -> Etiqueta 3 (3 muestras)
+2025-11-09 14:10:34,271 - INFO -    Cluster 23 -> Etiqueta 5 (2 muestras)
+2025-11-09 14:10:34,271 - INFO -    Cluster 24 -> Etiqueta 8 (2 muestras)
+2025-11-09 14:10:34,271 - INFO -    Cluster 25 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,271 - INFO -    Cluster 26 -> Etiqueta 6 (2 muestras)
+2025-11-09 14:10:34,271 - INFO -    Cluster 27 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,271 - INFO -    Cluster 28 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,272 - INFO -    Cluster 29 -> Etiqueta 6 (4 muestras)
+2025-11-09 14:10:34,272 - INFO -    Cluster 30 -> Etiqueta 6 (8 muestras)
+2025-11-09 14:10:34,272 - INFO -    Cluster 31 -> Etiqueta 2 (2 muestras)
+2025-11-09 14:10:34,272 - INFO -    Cluster 32 -> Etiqueta 2 (5 muestras)
+2025-11-09 14:10:34,272 - INFO -    Cluster 33 -> Etiqueta 2 (8 muestras)
+2025-11-09 14:10:34,273 - INFO -    Cluster 34 -> Etiqueta 3 (3 muestras)
+2025-11-09 14:10:34,273 - INFO -    Cluster 35 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,274 - INFO -    Cluster 36 -> Etiqueta 0 (2 muestras)
+2025-11-09 14:10:34,274 - INFO -    Cluster 37 -> Etiqueta 3 (4 muestras)
+2025-11-09 14:10:34,274 - INFO -    Cluster 38 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,275 - INFO -    Cluster 39 -> Etiqueta 1 (1 muestras)
+2025-11-09 14:10:34,275 - INFO -    Cluster 40 -> Etiqueta 1 (2 muestras)
+2025-11-09 14:10:34,276 - INFO -    Cluster 41 -> Etiqueta 0 (2 muestras)
+2025-11-09 14:10:34,276 - INFO -    Cluster 42 -> Etiqueta 1 (1 muestras)
+2025-11-09 14:10:34,276 - INFO -    Cluster 43 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,276 - INFO -    Cluster 44 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,277 - INFO -    Cluster 45 -> Etiqueta 3 (2 muestras)
+2025-11-09 14:10:34,277 - INFO -    Cluster 46 -> Etiqueta 5 (2 muestras)
+2025-11-09 14:10:34,277 - INFO -    Cluster 47 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,277 - INFO -    Cluster 48 -> Etiqueta 7 (3 muestras)
+2025-11-09 14:10:34,277 - INFO -    Cluster 49 -> Etiqueta 9 (3 muestras)
+2025-11-09 14:10:34,278 - INFO -    Cluster 50 -> Etiqueta 2 (3 muestras)
+2025-11-09 14:10:34,278 - INFO -    Cluster 51 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,278 - INFO -    Cluster 52 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,279 - INFO -    Cluster 53 -> Etiqueta 9 (3 muestras)
+2025-11-09 14:10:34,279 - INFO -    Cluster 54 -> Etiqueta 9 (10 muestras)
+2025-11-09 14:10:34,279 - INFO -    Cluster 55 -> Etiqueta 7 (6 muestras)
+2025-11-09 14:10:34,279 - INFO -    Cluster 56 -> Etiqueta 7 (4 muestras)
+2025-11-09 14:10:34,279 - INFO -    Cluster 57 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,280 - INFO -    Cluster 58 -> Etiqueta 5 (2 muestras)
+2025-11-09 14:10:34,280 - INFO -    Cluster 59 -> Etiqueta 5 (10 muestras)
+2025-11-09 14:10:34,280 - INFO -    Cluster 60 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,280 - INFO -    Cluster 61 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,280 - INFO -    Cluster 62 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,280 - INFO -    Cluster 63 -> Etiqueta 9 (2 muestras)
+2025-11-09 14:10:34,281 - INFO -    Cluster 64 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,281 - INFO -    Cluster 65 -> Etiqueta 2 (2 muestras)
+2025-11-09 14:10:34,282 - INFO -    Cluster 66 -> Etiqueta 7 (13 muestras)
+2025-11-09 14:10:34,282 - INFO -    Cluster 67 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,282 - INFO -    Cluster 68 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,283 - INFO -    Cluster 69 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,284 - INFO -    Cluster 70 -> Etiqueta 7 (3 muestras)
+2025-11-09 14:10:34,284 - INFO -    Cluster 71 -> Etiqueta 7 (29 muestras)
+2025-11-09 14:10:34,284 - INFO -    Cluster 72 -> Etiqueta 7 (3 muestras)
+2025-11-09 14:10:34,285 - INFO -    Cluster 73 -> Etiqueta 2 (5 muestras)
+2025-11-09 14:10:34,285 - INFO -    Cluster 74 -> Etiqueta 7 (3 muestras)
+2025-11-09 14:10:34,285 - INFO -    Cluster 75 -> Etiqueta 7 (11 muestras)
+2025-11-09 14:10:34,286 - INFO - 
+   ✓ Accuracy en test: 0.1417
+2025-11-09 14:10:34,286 - INFO -    ✓ Clusters únicos en test: 40
+2025-11-09 14:10:34,287 - INFO -    ✓ Distribución de predicciones: Counter({np.int64(1): 2900, np.int64(7): 33, np.int64(6): 18, np.int64(2): 17, np.int64(5): 9, np.int64(8): 9, np.int64(3): 5, np.int64(0): 5, np.int64(9): 4})
+2025-11-09 14:10:34,287 - INFO - 
+3. MeanShift - Config 3
+2025-11-09 14:10:34,287 - INFO -    Silhouette Score (train): 0.2462
+2025-11-09 14:10:34,308 - INFO -    Cluster 0 -> Etiqueta 1 (11375 muestras)
+2025-11-09 14:10:34,309 - INFO -    Cluster 1 -> Etiqueta 6 (14 muestras)
+2025-11-09 14:10:34,309 - INFO -    Cluster 2 -> Etiqueta 0 (24 muestras)
+2025-11-09 14:10:34,310 - INFO -    Cluster 3 -> Etiqueta 7 (17 muestras)
+2025-11-09 14:10:34,310 - INFO -    Cluster 4 -> Etiqueta 7 (14 muestras)
+2025-11-09 14:10:34,310 - INFO -    Cluster 5 -> Etiqueta 4 (17 muestras)
+2025-11-09 14:10:34,310 - INFO -    Cluster 6 -> Etiqueta 6 (12 muestras)
+2025-11-09 14:10:34,311 - INFO -    Cluster 7 -> Etiqueta 7 (8 muestras)
+2025-11-09 14:10:34,311 - INFO -    Cluster 8 -> Etiqueta 6 (10 muestras)
+2025-11-09 14:10:34,311 - INFO -    Cluster 9 -> Etiqueta 8 (11 muestras)
+2025-11-09 14:10:34,311 - INFO -    Cluster 10 -> Etiqueta 3 (8 muestras)
+2025-11-09 14:10:34,311 - INFO -    Cluster 11 -> Etiqueta 6 (5 muestras)
+2025-11-09 14:10:34,312 - INFO -    Cluster 12 -> Etiqueta 6 (9 muestras)
+2025-11-09 14:10:34,312 - INFO -    Cluster 13 -> Etiqueta 2 (4 muestras)
+2025-11-09 14:10:34,312 - INFO -    Cluster 14 -> Etiqueta 2 (4 muestras)
+2025-11-09 14:10:34,312 - INFO -    Cluster 15 -> Etiqueta 9 (4 muestras)
+2025-11-09 14:10:34,312 - INFO -    Cluster 16 -> Etiqueta 7 (4 muestras)
+2025-11-09 14:10:34,313 - INFO -    Cluster 17 -> Etiqueta 6 (3 muestras)
+2025-11-09 14:10:34,313 - INFO -    Cluster 18 -> Etiqueta 6 (15 muestras)
+2025-11-09 14:10:34,313 - INFO -    Cluster 19 -> Etiqueta 2 (5 muestras)
+2025-11-09 14:10:34,313 - INFO -    Cluster 20 -> Etiqueta 3 (3 muestras)
+2025-11-09 14:10:34,313 - INFO -    Cluster 21 -> Etiqueta 7 (3 muestras)
+2025-11-09 14:10:34,313 - INFO -    Cluster 22 -> Etiqueta 6 (2 muestras)
+2025-11-09 14:10:34,314 - INFO -    Cluster 23 -> Etiqueta 6 (2 muestras)
+2025-11-09 14:10:34,314 - INFO -    Cluster 24 -> Etiqueta 2 (3 muestras)
+2025-11-09 14:10:34,315 - INFO -    Cluster 25 -> Etiqueta 3 (4 muestras)
+2025-11-09 14:10:34,315 - INFO -    Cluster 26 -> Etiqueta 0 (2 muestras)
+2025-11-09 14:10:34,316 - INFO -    Cluster 27 -> Etiqueta 3 (2 muestras)
+2025-11-09 14:10:34,316 - INFO -    Cluster 28 -> Etiqueta 3 (2 muestras)
+2025-11-09 14:10:34,316 - INFO -    Cluster 29 -> Etiqueta 2 (2 muestras)
+2025-11-09 14:10:34,317 - INFO -    Cluster 30 -> Etiqueta 3 (2 muestras)
+2025-11-09 14:10:34,317 - INFO -    Cluster 31 -> Etiqueta 9 (2 muestras)
+2025-11-09 14:10:34,318 - INFO -    Cluster 32 -> Etiqueta 5 (2 muestras)
+2025-11-09 14:10:34,318 - INFO -    Cluster 33 -> Etiqueta 5 (4 muestras)
+2025-11-09 14:10:34,318 - INFO -    Cluster 34 -> Etiqueta 9 (2 muestras)
+2025-11-09 14:10:34,318 - INFO -    Cluster 35 -> Etiqueta 7 (3 muestras)
+2025-11-09 14:10:34,319 - INFO -    Cluster 36 -> Etiqueta 7 (10 muestras)
+2025-11-09 14:10:34,319 - INFO -    Cluster 37 -> Etiqueta 5 (2 muestras)
+2025-11-09 14:10:34,319 - INFO -    Cluster 38 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,319 - INFO -    Cluster 39 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,320 - INFO -    Cluster 40 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,320 - INFO -    Cluster 41 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,320 - INFO -    Cluster 42 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,320 - INFO -    Cluster 43 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,320 - INFO -    Cluster 44 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,321 - INFO -    Cluster 45 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,321 - INFO -    Cluster 46 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,321 - INFO -    Cluster 47 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,322 - INFO -    Cluster 48 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,322 - INFO -    Cluster 49 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,322 - INFO -    Cluster 50 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,322 - INFO -    Cluster 51 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,322 - INFO -    Cluster 52 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,323 - INFO -    Cluster 53 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,323 - INFO -    Cluster 54 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,323 - INFO -    Cluster 55 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,324 - INFO -    Cluster 56 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,324 - INFO -    Cluster 57 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,325 - INFO -    Cluster 58 -> Etiqueta 6 (3 muestras)
+2025-11-09 14:10:34,325 - INFO -    Cluster 59 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,325 - INFO -    Cluster 60 -> Etiqueta 2 (3 muestras)
+2025-11-09 14:10:34,325 - INFO -    Cluster 61 -> Etiqueta 6 (3 muestras)
+2025-11-09 14:10:34,326 - INFO -    Cluster 62 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,326 - INFO -    Cluster 63 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,326 - INFO -    Cluster 64 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,327 - INFO -    Cluster 65 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,327 - INFO -    Cluster 66 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,327 - INFO -    Cluster 67 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,328 - INFO -    Cluster 68 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,328 - INFO -    Cluster 69 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,328 - INFO -    Cluster 70 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,328 - INFO -    Cluster 71 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,328 - INFO -    Cluster 72 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,329 - INFO -    Cluster 73 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,329 - INFO -    Cluster 74 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,329 - INFO -    Cluster 75 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,329 - INFO -    Cluster 76 -> Etiqueta 2 (3 muestras)
+2025-11-09 14:10:34,330 - INFO -    Cluster 77 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,330 - INFO -    Cluster 78 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,330 - INFO -    Cluster 79 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,330 - INFO -    Cluster 80 -> Etiqueta 2 (6 muestras)
+2025-11-09 14:10:34,331 - INFO -    Cluster 81 -> Etiqueta 2 (4 muestras)
+2025-11-09 14:10:34,331 - INFO -    Cluster 82 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,332 - INFO -    Cluster 83 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,332 - INFO -    Cluster 84 -> Etiqueta 2 (3 muestras)
+2025-11-09 14:10:34,332 - INFO -    Cluster 85 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,333 - INFO -    Cluster 86 -> Etiqueta 1 (2 muestras)
+2025-11-09 14:10:34,333 - INFO -    Cluster 87 -> Etiqueta 2 (4 muestras)
+2025-11-09 14:10:34,334 - INFO -    Cluster 88 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,334 - INFO -    Cluster 89 -> Etiqueta 6 (3 muestras)
+2025-11-09 14:10:34,334 - INFO -    Cluster 90 -> Etiqueta 4 (4 muestras)
+2025-11-09 14:10:34,335 - INFO -    Cluster 91 -> Etiqueta 2 (7 muestras)
+2025-11-09 14:10:34,335 - INFO -    Cluster 92 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,335 - INFO -    Cluster 93 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,335 - INFO -    Cluster 94 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,336 - INFO -    Cluster 95 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,336 - INFO -    Cluster 96 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,336 - INFO -    Cluster 97 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,336 - INFO -    Cluster 98 -> Etiqueta 6 (1 muestras)
+2025-11-09 14:10:34,336 - INFO -    Cluster 99 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,337 - INFO -    Cluster 100 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,337 - INFO -    Cluster 101 -> Etiqueta 3 (13 muestras)
+2025-11-09 14:10:34,337 - INFO -    Cluster 102 -> Etiqueta 2 (12 muestras)
+2025-11-09 14:10:34,337 - INFO -    Cluster 103 -> Etiqueta 2 (6 muestras)
+2025-11-09 14:10:34,338 - INFO -    Cluster 104 -> Etiqueta 2 (3 muestras)
+2025-11-09 14:10:34,338 - INFO -    Cluster 105 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,338 - INFO -    Cluster 106 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,338 - INFO -    Cluster 107 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,338 - INFO -    Cluster 108 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,339 - INFO -    Cluster 109 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,339 - INFO -    Cluster 110 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,340 - INFO -    Cluster 111 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,340 - INFO -    Cluster 112 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,341 - INFO -    Cluster 113 -> Etiqueta 2 (2 muestras)
+2025-11-09 14:10:34,341 - INFO -    Cluster 114 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,341 - INFO -    Cluster 115 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,342 - INFO -    Cluster 116 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,342 - INFO -    Cluster 117 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,342 - INFO -    Cluster 118 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,343 - INFO -    Cluster 119 -> Etiqueta 2 (7 muestras)
+2025-11-09 14:10:34,343 - INFO -    Cluster 120 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,343 - INFO -    Cluster 121 -> Etiqueta 1 (1 muestras)
+2025-11-09 14:10:34,343 - INFO -    Cluster 122 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,344 - INFO -    Cluster 123 -> Etiqueta 1 (1 muestras)
+2025-11-09 14:10:34,344 - INFO -    Cluster 124 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,344 - INFO -    Cluster 125 -> Etiqueta 5 (2 muestras)
+2025-11-09 14:10:34,344 - INFO -    Cluster 126 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,345 - INFO -    Cluster 127 -> Etiqueta 5 (5 muestras)
+2025-11-09 14:10:34,345 - INFO -    Cluster 128 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,345 - INFO -    Cluster 129 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,345 - INFO -    Cluster 130 -> Etiqueta 3 (4 muestras)
+2025-11-09 14:10:34,345 - INFO -    Cluster 131 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,346 - INFO -    Cluster 132 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,346 - INFO -    Cluster 133 -> Etiqueta 2 (2 muestras)
+2025-11-09 14:10:34,346 - INFO -    Cluster 134 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,346 - INFO -    Cluster 135 -> Etiqueta 4 (5 muestras)
+2025-11-09 14:10:34,346 - INFO -    Cluster 136 -> Etiqueta 4 (3 muestras)
+2025-11-09 14:10:34,347 - INFO -    Cluster 137 -> Etiqueta 0 (4 muestras)
+2025-11-09 14:10:34,347 - INFO -    Cluster 138 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,347 - INFO -    Cluster 139 -> Etiqueta 3 (3 muestras)
+2025-11-09 14:10:34,347 - INFO -    Cluster 140 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,348 - INFO -    Cluster 141 -> Etiqueta 0 (4 muestras)
+2025-11-09 14:10:34,348 - INFO -    Cluster 142 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,348 - INFO -    Cluster 143 -> Etiqueta 2 (5 muestras)
+2025-11-09 14:10:34,349 - INFO -    Cluster 144 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,349 - INFO -    Cluster 145 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,350 - INFO -    Cluster 146 -> Etiqueta 5 (6 muestras)
+2025-11-09 14:10:34,350 - INFO -    Cluster 147 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,350 - INFO -    Cluster 148 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,351 - INFO -    Cluster 149 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,351 - INFO -    Cluster 150 -> Etiqueta 3 (12 muestras)
+2025-11-09 14:10:34,351 - INFO -    Cluster 151 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,351 - INFO -    Cluster 152 -> Etiqueta 5 (2 muestras)
+2025-11-09 14:10:34,352 - INFO -    Cluster 153 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,352 - INFO -    Cluster 154 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,352 - INFO -    Cluster 155 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,352 - INFO -    Cluster 156 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,352 - INFO -    Cluster 157 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,353 - INFO -    Cluster 158 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,353 - INFO -    Cluster 159 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,353 - INFO -    Cluster 160 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,353 - INFO -    Cluster 161 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,354 - INFO -    Cluster 162 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,354 - INFO -    Cluster 163 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,354 - INFO -    Cluster 164 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,354 - INFO -    Cluster 165 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,354 - INFO -    Cluster 166 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,355 - INFO -    Cluster 167 -> Etiqueta 3 (3 muestras)
+2025-11-09 14:10:34,355 - INFO -    Cluster 168 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,355 - INFO -    Cluster 169 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,355 - INFO -    Cluster 170 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,355 - INFO -    Cluster 171 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,356 - INFO -    Cluster 172 -> Etiqueta 9 (8 muestras)
+2025-11-09 14:10:34,356 - INFO -    Cluster 173 -> Etiqueta 2 (2 muestras)
+2025-11-09 14:10:34,356 - INFO -    Cluster 174 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,357 - INFO -    Cluster 175 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,357 - INFO -    Cluster 176 -> Etiqueta 7 (6 muestras)
+2025-11-09 14:10:34,358 - INFO -    Cluster 177 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,358 - INFO -    Cluster 178 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,359 - INFO -    Cluster 179 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,359 - INFO -    Cluster 180 -> Etiqueta 9 (3 muestras)
+2025-11-09 14:10:34,359 - INFO -    Cluster 181 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,360 - INFO -    Cluster 182 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,360 - INFO -    Cluster 183 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,360 - INFO -    Cluster 184 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,361 - INFO -    Cluster 185 -> Etiqueta 3 (1 muestras)
+2025-11-09 14:10:34,361 - INFO -    Cluster 186 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,361 - INFO -    Cluster 187 -> Etiqueta 0 (1 muestras)
+2025-11-09 14:10:34,361 - INFO -    Cluster 188 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,361 - INFO -    Cluster 189 -> Etiqueta 4 (5 muestras)
+2025-11-09 14:10:34,362 - INFO -    Cluster 190 -> Etiqueta 8 (1 muestras)
+2025-11-09 14:10:34,362 - INFO -    Cluster 191 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,362 - INFO -    Cluster 192 -> Etiqueta 4 (1 muestras)
+2025-11-09 14:10:34,362 - INFO -    Cluster 193 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,363 - INFO -    Cluster 194 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,363 - INFO -    Cluster 195 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,363 - INFO -    Cluster 196 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,363 - INFO -    Cluster 197 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,363 - INFO -    Cluster 198 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,363 - INFO -    Cluster 199 -> Etiqueta 7 (7 muestras)
+2025-11-09 14:10:34,364 - INFO -    Cluster 200 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,364 - INFO -    Cluster 201 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,364 - INFO -    Cluster 202 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,365 - INFO -    Cluster 203 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,365 - INFO -    Cluster 204 -> Etiqueta 9 (14 muestras)
+2025-11-09 14:10:34,366 - INFO -    Cluster 205 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,366 - INFO -    Cluster 206 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,366 - INFO -    Cluster 207 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,367 - INFO -    Cluster 208 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,367 - INFO -    Cluster 209 -> Etiqueta 7 (9 muestras)
+2025-11-09 14:10:34,367 - INFO -    Cluster 210 -> Etiqueta 5 (1 muestras)
+2025-11-09 14:10:34,368 - INFO -    Cluster 211 -> Etiqueta 9 (2 muestras)
+2025-11-09 14:10:34,368 - INFO -    Cluster 212 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,368 - INFO -    Cluster 213 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,368 - INFO -    Cluster 214 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,369 - INFO -    Cluster 215 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,369 - INFO -    Cluster 216 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,369 - INFO -    Cluster 217 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,369 - INFO -    Cluster 218 -> Etiqueta 2 (1 muestras)
+2025-11-09 14:10:34,370 - INFO -    Cluster 219 -> Etiqueta 7 (6 muestras)
+2025-11-09 14:10:34,370 - INFO -    Cluster 220 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,370 - INFO -    Cluster 221 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,370 - INFO -    Cluster 222 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,370 - INFO -    Cluster 223 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,371 - INFO -    Cluster 224 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,371 - INFO -    Cluster 225 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,371 - INFO -    Cluster 226 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,371 - INFO -    Cluster 227 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,371 - INFO -    Cluster 228 -> Etiqueta 7 (3 muestras)
+2025-11-09 14:10:34,372 - INFO -    Cluster 229 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,372 - INFO -    Cluster 230 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,373 - INFO -    Cluster 231 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,373 - INFO -    Cluster 232 -> Etiqueta 7 (2 muestras)
+2025-11-09 14:10:34,373 - INFO -    Cluster 233 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,374 - INFO -    Cluster 234 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,374 - INFO -    Cluster 235 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,375 - INFO -    Cluster 236 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,375 - INFO -    Cluster 237 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,375 - INFO -    Cluster 238 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,375 - INFO -    Cluster 239 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,376 - INFO -    Cluster 240 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,376 - INFO -    Cluster 241 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,376 - INFO -    Cluster 242 -> Etiqueta 9 (1 muestras)
+2025-11-09 14:10:34,376 - INFO -    Cluster 243 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,377 - INFO -    Cluster 244 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,377 - INFO -    Cluster 245 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,377 - INFO -    Cluster 246 -> Etiqueta 7 (1 muestras)
+2025-11-09 14:10:34,378 - INFO - 
+   ✓ Accuracy en test: 0.1543
+2025-11-09 14:10:34,378 - INFO -    ✓ Clusters únicos en test: 88
+2025-11-09 14:10:34,379 - INFO -    ✓ Distribución de predicciones: Counter({np.int64(1): 2846, np.int64(2): 34, np.int64(7): 29, np.int64(6): 28, np.int64(3): 18, np.int64(9): 18, np.int64(4): 9, np.int64(5): 8, np.int64(0): 8, np.int64(8): 2})
+2025-11-09 14:10:34,379 - INFO - 
+============================================================
+2025-11-09 14:10:34,379 - INFO - ANÁLISIS FINAL
+2025-11-09 14:10:34,379 - INFO - ============================================================
+2025-11-09 14:10:34,380 - INFO - 
+El procedimiento de asignar etiquetas mediante clustering presenta las siguientes
+características:
+
+VENTAJAS:
+- No requiere etiquetas durante el entrenamiento
+- Puede descubrir patrones no supervisados en los datos
+- Útil cuando las etiquetas son costosas de obtener
+
+LIMITACIONES:
+- Los clusters no necesariamente corresponden a las clases reales
+- Un cluster puede contener muestras de múltiples clases
+- La asignación de etiqueta dominante puede ser arbitraria
+- El número de clusters puede no coincidir con el número de clases
+
+CONCLUSIÓN:
+Este método es razonable como técnica exploratoria o para pre-etiquetar datos,
+pero no debe usarse como único método de clasificación cuando se requiere
+precisión. Es más útil para:
+1. Análisis exploratorio de datos
+2. Detección de anomalías
+3. Pre-procesamiento antes de etiquetado manual
+4. Reducción de dimensionalidad
+    
+2025-11-09 14:10:34,381 - INFO - 
+============================================================
+2025-11-09 14:10:34,381 - INFO - EJECUCIÓN COMPLETADA EXITOSAMENTE
+2025-11-09 14:10:34,381 - INFO - Log guardado en: logs\clustering_20251109_130708.log
+2025-11-09 14:10:34,382 - INFO - ============================================================
